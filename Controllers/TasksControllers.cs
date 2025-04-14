@@ -203,5 +203,20 @@ namespace TaskManager.Controllers
         {
             return _context.Tasks.Any(e => e.Id == id);
         }
+
+        // GET: Tasks/GetTasksJson
+        [HttpGet]
+        public async Task<IActionResult> GetTasksJson()
+        {
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            
+            var tasks = await _context.Tasks
+                .Include(t => t.Project)
+                .Where(t => t.UserId == currentUserId || t.UserId == null)
+                .OrderBy(t => t.DueDate)
+                .ToListAsync();
+                
+            return Json(tasks);
+        }
     }
 }
