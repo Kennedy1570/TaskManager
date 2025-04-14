@@ -22,7 +22,7 @@ namespace TaskManager.Models
         public TaskPriority Priority { get; set; }
 
         [Required]
-        public TaskStatus Status { get; set; }
+        public TaskItemStatus Status { get; set; }
 
         //Foreign keys
         public string UserId { get; set; }
@@ -49,7 +49,7 @@ namespace TaskManager.Models
         Urgent
     }
 
-    public enum TaskStatus
+    public enum TaskItemStatus
     {
         NotStarted,
         InProgress,
